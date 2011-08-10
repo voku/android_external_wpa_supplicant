@@ -679,11 +679,13 @@ static int wpa_driver_priv_driver_cmd(void *priv, char *cmd, char *buf, size_t b
 	wpa_printf(MSG_DEBUG, "AWEXT: %s %s", __func__, cmd);
 
 	if (os_strcasecmp(cmd, "start") == 0) {
+		wpa_msg(drv->ctx, MSG_INFO, WPA_EVENT_DRIVER_STATE "STARTED");
 		wpa_printf(MSG_DEBUG,"Start command");
 		return (ret);
 	}
 
 	if (os_strcasecmp(cmd, "stop") == 0) {
+		wpa_msg(drv->ctx, MSG_INFO, WPA_EVENT_DRIVER_STATE "STOPPED");
 		wpa_printf(MSG_DEBUG,"Stop command");
 		if ((wpa_driver_awext_get_ifflags(drv, &flags) == 0) &&
 		    (flags & IFF_UP)) {
